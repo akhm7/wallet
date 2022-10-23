@@ -21,9 +21,9 @@ namespace wallet
         public void CheckDepositLimitTest()
         {
             var controller = new WalletController(_logger, _walletRepository, _transactionLogger);
-            var input = new WalletController.DepositInput{value=1000};
-            var maxInputForAuth = new WalletController.DepositInput{value=100000};
-            var maxInputForNotAuth = new WalletController.DepositInput{value=100000};
+            var input = new WalletController.DepositInput{value = 1000};
+            var maxInputForAuth = new WalletController.DepositInput{value = 100000};
+            var maxInputForNotAuth = new WalletController.DepositInput{value = 10000};
 
             controller.Deposit(authUserId, maxInputForAuth);
             controller.Deposit(notAuthUserId, maxInputForNotAuth);
