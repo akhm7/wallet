@@ -5,9 +5,16 @@ using Microsoft.Extensions.Primitives;
 using wallet;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddScoped((_) => new HMACSHA1(Encoding.UTF8.GetBytes("01234567890123456789012345678901")));
-// Add services to the container.
 
+// Add logger
+builder.Host.ConfigureLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.AddConsole();
+});
+
+// Add services to the container.
+builder.Services.AddScoped((_) => new HMACSHA1(Encoding.UTF8.GetBytes("01234567890123456789012345678901")));
 builder.Services.AddControllers();
 builder.Services.AddSingleton(new WalletRepository(new Wallet[]{
     new Wallet("1", false),
@@ -24,7 +31,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

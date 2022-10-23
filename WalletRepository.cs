@@ -45,7 +45,7 @@ namespace wallet
         }
     }
 
-    public record DepositInfo(decimal Deposit, int DepositsCount);
+    public record ReplenishmentInfo(decimal Replenishment, int ReplenishmentsCount);
 
     public class TransactionLogger
     {
@@ -61,14 +61,14 @@ namespace wallet
             _logs[entry.WalletId].Add(entry);
         }
 
-        public DepositInfo GetDepositsInfo(string walletId)
+        public ReplenishmentInfo GetReplenishmentsInfo(string walletId)
         {
             var now = DateTimeOffset.UtcNow;
             var month = now.Month;
             var year = now.Year;
 
             var count = 0;
-            decimal deposit = 0;
+            decimal replenishment = 0;
 
             if (_logs.ContainsKey(walletId))
             {
@@ -78,12 +78,12 @@ namespace wallet
                         && transaction.PerformTime.Year == year)
                     {
                         count++;
-                        deposit += transaction.Value;
+                        replenishment += transaction.Value;
                     }
                 }
             }
-            
-            return new(deposit, count);
+
+            return new(replenishment, count);
         }
     }
 

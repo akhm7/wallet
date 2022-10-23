@@ -18,18 +18,18 @@ namespace wallet
         private string notAuthUserId = "2";
 
         [Fact]
-        public void CheckDepositLimitTest()
+        public void CheckReplenishmentLimitTest()
         {
             var controller = new WalletController(_logger, _walletRepository, _transactionLogger);
-            var input = new WalletController.DepositInput{value = 1000};
-            var maxInputForAuth = new WalletController.DepositInput{value = 100000};
-            var maxInputForNotAuth = new WalletController.DepositInput{value = 10000};
+            var input = new WalletController.ReplenishmentInput{value = 1000};
+            var maxInputForAuth = new WalletController.ReplenishmentInput{value = 100000};
+            var maxInputForNotAuth = new WalletController.ReplenishmentInput{value = 10000};
 
-            controller.Deposit(authUserId, maxInputForAuth);
-            controller.Deposit(notAuthUserId, maxInputForNotAuth);
+            controller.Replenishment(authUserId, maxInputForAuth);
+            controller.Replenishment(notAuthUserId, maxInputForNotAuth);
 
-            Assert.IsType<BadRequestResult>(controller.Deposit(authUserId, input));
-            Assert.IsType<BadRequestResult>(controller.Deposit(notAuthUserId, input));
+            Assert.IsType<BadRequestResult>(controller.Replenishment(authUserId, input));
+            Assert.IsType<BadRequestResult>(controller.Replenishment(notAuthUserId, input));
         }
     }
 }
