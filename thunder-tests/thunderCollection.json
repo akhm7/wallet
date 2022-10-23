@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "a7c8c450-3025-4b81-b1b0-a590fc40ae55",
+    "colName": "wallet_api",
+    "created": "2022-10-23T15:13:05.153Z",
+    "sortNum": 10000,
+    "folders": [],
+    "settings": {
+      "headers": [],
+      "tests": [],
+      "envId": "79122f0f-0468-468f-b9d6-ed6650737fda"
+    }
+  }
+]
